@@ -1,0 +1,41 @@
+:root {
+  --color-primary: #293462;
+  --color-primary-two: #f24c4c;
+  --color-secondary: #ec9b3b;
+  --color-secondary-two: #f7d716;
+  --color-light: #fff;
+  --color-dark: #000;
+  --color-gray: #555555;
+
+  --font-roboto: "Roboto", sans-serif;
+  --font-noto: "Noto Sans", sans-serif;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+#root > .anticon {
+  height: 80vh;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+#root .anticon svg {
+  margin: 0 auto;
+}
+
+.App {
+  min-height: 100vh;
+  position: relative;
+}
+
+.main__content__container {
+  padding: 65px 20px;
+  width: 100%;
+}

@@ -1,0 +1,18 @@
+.footer__container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 20px;
+  background: var(--color-primary);
+  box-shadow: -2px 0px 5px #29346269;
+  color: var(--color-light);
+  font-family: var(--font-roboto);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer__container a {
+  color: var(--color-light);
+  font-weight: bolder;
+}
