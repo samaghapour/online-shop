@@ -25,3 +25,49 @@ export const GetAllProducts = () => async (dispatch) => {
     alert("something went wrong!");
   }
 };
+
+export const GetProducts = (productCategory) => async (dispatch) => {
+  try {
+    dispatch({ type: "IS_LOADING", payload: true });
+    commerce.products
+      .list({
+        category_slug: [productCategory],
+        limit: 200,
+      })
+      .then((response) => {
+        const exisitingProducts = response.data.filter(
+          (item) => item.price.raw > 0
+        );
+
+        dispatch({
+          type: "GET_EXISITING_PRODUCTS",
+          payload: exisitingProducts,
+        });
+        dispatch({ type: "IS_LOADING", payload: false });
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const GetProductDetails = (id) => (dispatch) => {
+  try {
+    dispatch({ type: "IS_LOADING", payload: true });
+    commerce.products.retrieve(id).then((response) => {
+      dispatch({ type: "GET_PRODUCT_DETAILS", payload: response });
+    });
+    dispatch({ type: "IS_LOADING", payload: false });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const AddToCart = (id, quantityNumber) => async (dispatch) => {
+  try {
+    commerce.cart.add(id, quantityNumber).then((response) => {
+      dispatch({ type: "GET_CART", payload: response });
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
