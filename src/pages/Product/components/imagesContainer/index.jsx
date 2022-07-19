@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 
 function ImagesContainer({ data }) {
   const [mainImage, setMainImage] = useState(data[0]);
@@ -32,4 +32,4 @@ function ImagesContainer({ data }) {
   );
 }
 
-export default ImagesContainer;
+export default memo(ImagesContainer);

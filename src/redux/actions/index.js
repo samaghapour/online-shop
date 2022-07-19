@@ -71,3 +71,53 @@ export const AddToCart = (id, quantityNumber) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const UpdateProductQuantity =
+  (lineId, quantityNumber) => async (dispatch) => {
+    try {
+      commerce.cart
+        .update(lineId, { quantity: quantityNumber })
+        .then((response) => {
+          dispatch({
+            type: "UPDATE_CART_BY_QUANTITY",
+            payload: response,
+          });
+        });
+    } catch (error) {
+      console.log(error);
+      console.log("error received from UpdateProductQuantity action");
+      alert("something went wrong! , try again please");
+    }
+  };
+
+export const DeleteFromCart = (id) => async (dispatch) => {
+  try {
+    commerce.cart.remove(id).then((response) => {
+      dispatch({
+        type: "DELETE_ADDED_PRODUCTS",
+        payload: response,
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    console.log("error received from deleteFromCart action");
+    alert("something went wrong! , try again please");
+  }
+};
+
+//search action for search challenge
+// export const SearchProduct =
+//   ( searchValue, allProducts) => async (dispatch) => {
+//     dispatch({ type: 'IS_LOADING', payload: true });
+
+//       let searchResult = allProducts.filter((product) => {
+//         return (
+//           product.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+//           product.id.toLowerCase() === searchValue.toLowerCase() ||
+//           product.description.toLowerCase().includes(searchValue.toLowerCase())
+//         );
+//       });
+
+//     dispatch({ type: 'SEARCH_PRODUCT_RESULT', payload: searchResult });
+//     dispatch({ type: 'IS_LOADING', payload: false });
+//   };

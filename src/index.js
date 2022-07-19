@@ -16,7 +16,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 const persistConfig = {
   key: "root",
-  blacklist: ["Products"],
+  blacklist: ["Products", "ProductDetails"],
   storage,
 };
 

@@ -39,4 +39,4 @@ function DescriptionContainer({ data }) {
   );
 }
 
-export default DescriptionContainer;
+export default React.memo(DescriptionContainer);
