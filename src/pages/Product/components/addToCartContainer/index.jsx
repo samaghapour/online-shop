@@ -52,4 +52,4 @@ function AddToCartContainer({ data }) {
   );
 }
 
-export default AddToCartContainer;
+export default React.memo(AddToCartContainer);

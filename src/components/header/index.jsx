@@ -13,6 +13,7 @@ import { toggleSidebar } from "../../utils/helpers";
 function Header() {
   const { logout, isAuthenticated, loginWithRedirect } = useAuth0();
   const cart = useSelector((state) => state.Cart);
+
   return (
     <div className="header__container">
       <button className="manu-btn" onClick={toggleSidebar}>
@@ -34,7 +35,7 @@ function Header() {
       <Link to="/basket" className="basket__container">
         <ShoppingCartOutlined />
         <span className="cart-total-items">
-          {/* {cart ? cart.cart.total_items : "0"} */}0
+          {cart && isAuthenticated ? cart.cart.total_items : "0"}
         </span>
       </Link>
     </div>
