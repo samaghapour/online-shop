@@ -2,7 +2,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { GetProductDetails } from "../../redux/actions";
 import AddToCartContainer from "./components/addToCartContainer";
 import DescriptionContainer from "./components/descriptionContainer";
 import ImagesContainer from "./components/imagesContainer";
@@ -10,21 +9,21 @@ import "./product.css";
 import InformationTable from "./components/informationTable";
 import StarProgressBars from "./components/review/StarProgressBars";
 import CommentBox from "./components/review/CommentBox";
+import { getProductDetails } from "../../features/productDetails/action";
 
 function Product() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const details = useSelector((state) => state.ProductDetails);
-  const isLoading = useSelector((state) => state.IsLoading);
 
   const variants =
-    details &&
-    details.variant_groups.map((item) => {
+    details.value &&
+    details.value.variant_groups.map((item) => {
       return { id: item.id, th: item.name, options: item.options };
     });
 
   useEffect(() => {
-    dispatch(GetProductDetails(id));
+    dispatch(getProductDetails(id));
   }, [id]);
 
   const commentData = useMemo(() => {
@@ -78,18 +77,18 @@ function Product() {
 
   return (
     <div className="product-details__container">
-      {isLoading ? (
+      {details.loading ? (
         <div className="loading__container">
           <LoadingOutlined spin={true} style={{ fontSize: "25px" }} />
         </div>
       ) : (
         <>
           <div className="title-details__container">
-            {details && (
+            {details.value && (
               <>
-                <ImagesContainer data={details.assets} />
-                <DescriptionContainer data={details} />
-                <AddToCartContainer data={details} />
+                <ImagesContainer data={details.value.assets} />
+                <DescriptionContainer data={details.value} />
+                <AddToCartContainer data={details.value} />
               </>
             )}
           </div>
@@ -101,7 +100,7 @@ function Product() {
             <span className="product-details-title">Product Description</span>
             <div
               className="description"
-              dangerouslySetInnerHTML={{ __html: details?.description }}
+              dangerouslySetInnerHTML={{ __html: details.value?.description }}
             />
           </div>
           <div className="reviews__container">

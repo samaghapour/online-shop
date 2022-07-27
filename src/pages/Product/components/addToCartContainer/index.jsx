@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { AddToCart } from "../../../../redux/actions";
+import { addToCart } from "../../../../features/cart/action";
 
 function AddToCartContainer({ data }) {
   const quantityRef = useRef();
@@ -12,7 +12,7 @@ function AddToCartContainer({ data }) {
     if (isAuthenticated) {
       const quantityNumber = quantityRef.current.value;
 
-      dispatch(AddToCart(data.id, quantityNumber));
+      dispatch(addToCart({ id: data.id, quantityNumber }));
     } else {
       alert("You need to sign in first!");
     }
