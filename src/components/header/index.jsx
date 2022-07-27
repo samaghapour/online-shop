@@ -4,15 +4,21 @@ import {
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./header.css";
 import { Link } from "react-router-dom";
 import { toggleSidebar } from "../../utils/helpers";
+import { getCart } from "../../features/cart/action";
 
 function Header() {
   const { logout, isAuthenticated, loginWithRedirect } = useAuth0();
   const cart = useSelector((state) => state.Cart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCart());
+  }, []);
 
   return (
     <div className="header__container">
@@ -35,7 +41,7 @@ function Header() {
       <Link to="/basket" className="basket__container">
         <ShoppingCartOutlined />
         <span className="cart-total-items">
-          {cart && isAuthenticated ? cart.cart.total_items : "0"}
+          {cart?.value && isAuthenticated ? cart.value?.total_items : "0"}
         </span>
       </Link>
     </div>

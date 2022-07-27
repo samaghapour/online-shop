@@ -7,9 +7,7 @@ import "./basket.css";
 function Basket() {
   const { isAuthenticated, loginWithRedirect } = useAuth0();
   const cart = useSelector((state) => state.Cart);
-  const basketItems = cart?.cart?.line_items;
-
-  console.log(basketItems);
+  const basketItems = cart?.value?.line_items;
 
   return (
     <div className="basket__container">
@@ -33,8 +31,8 @@ function Basket() {
               </ul>
               <div className="total__price__container">
                 <span>
-                  Subtotal ({cart?.cart?.total_items} items):{" "}
-                  <b>{cart?.cart?.subtotal?.formatted_with_symbol}</b>
+                  Subtotal ({cart.value?.total_items} items):{" "}
+                  <b>{cart?.value?.subtotal?.formatted_with_symbol}</b>
                 </span>
               </div>
             </>

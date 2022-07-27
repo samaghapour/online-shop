@@ -1,20 +1,20 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  DeleteFromCart,
-  UpdateProductQuantity,
-} from "../../../../redux/actions";
+import { updateCart, deleteFromCart } from "../../../../features/cart/action";
 
 function BasketItem({ data }) {
   const quantityRef = useRef();
   const dispatch = useDispatch();
 
   const UpdateProductQuantityFunc = () => {
-    dispatch(UpdateProductQuantity(data.id, quantityRef.current.value));
+    dispatch(
+      updateCart({ lineId: data.id, quantityNumber: quantityRef.current.value })
+    );
   };
+
   const DeleteAddedProduct = () => {
-    dispatch(DeleteFromCart(data.id));
+    dispatch(deleteFromCart(data.id));
   };
 
   return (

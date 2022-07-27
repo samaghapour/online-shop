@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import "./sidebar.css";
 import { toggleSidebar } from "../../utils/helpers";
 import { useAuth0 } from "@auth0/auth0-react";
-import { GetCategories } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getCategories } from "../../features/categories/action";
 
 function dropdown(e) {
   const target = e.target;
@@ -19,7 +19,7 @@ function Sidebar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(GetCategories());
+    dispatch(getCategories());
   }, []);
 
   return (
@@ -30,9 +30,9 @@ function Sidebar() {
             Welcome, {isAuthenticated ? user.given_name : "Anonymous!"}
           </span>
         </div>
-        {categories &&
-          categories.length > 0 &&
-          categories.map((category) => {
+        {categories?.value &&
+          categories.value.length > 0 &&
+          categories.value.map((category) => {
             return (
               <div key={category.id} className="sidebar-list_item">
                 <div onClick={dropdown} className="dropbtn">
